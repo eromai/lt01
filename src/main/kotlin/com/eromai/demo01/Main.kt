@@ -1,22 +1,25 @@
 package com.eromai.demo01
 
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import java.util.Scanner
 
-@SpringBootApplication
-class Demo01Application
+@SpringBootApplication(
+    scanBasePackages = ["com.eromai.demo01"]
+)
+class BookStoreApplication {
+    companion object {
+        private val logger = LoggerFactory.getLogger(BookStoreApplication::class.java)
+    }
 
-fun main(args: Array<String>) {
-    runApplication<Demo01Application>(*args)
-
-    val scanner = Scanner(System.`in`)
-    println("Enter your name:")
-    val name = scanner.nextLine()
-    println("Hello, \$name! Welcome to the Spring Boot application.")
+    init {
+        logger.info("Initializing Book Store Application")
+    }
 }
 
-
-
-
-
+fun main(args: Array<String>) {
+    runApplication<BookStoreApplication>(*args) {
+        // You can add additional configuration here if needed
+        addInitializers()
+    }
+}
